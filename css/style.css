@@ -294,4 +294,139 @@ h3 {
     font-size: 0.9rem;
     padding: 6px 12px;
   }
+
+  .logo-text {
+    font-size: 1.8rem;
+    /* Smaller font on mobile */
+  }
+}
+
+/* Member Cards */
+.members-grid {
+  counter-reset: member-counter;
+  /* Initialize counter */
+}
+
+.member-card {
+  display: flex;
+  background: var(--color-glass);
+  border: 1px solid var(--color-glass-border);
+  border-radius: var(--radius-md);
+  padding: 20px;
+  align-items: flex-start;
+  gap: 20px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  backdrop-filter: blur(10px);
+  position: relative;
+  /* Context for pseudo-element */
+  counter-increment: member-counter;
+  /* Increment counter */
+}
+
+/* Numbering Style */
+.member-card::before {
+  content: counter(member-counter);
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  background: linear-gradient(135deg, var(--color-accent) 0%, #aaccff 100%);
+  color: #fff;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 800;
+  font-size: 1.1rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  z-index: 10;
+  border: 2px solid var(--color-bg-deep);
+}
+
+.member-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 20px rgba(77, 77, 255, 0.2);
+  border-color: var(--color-accent);
+}
+
+.member-icon-wrapper {
+  flex-shrink: 0;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid var(--color-glass-border);
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.member-icon {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.member-info {
+  flex-grow: 1;
+}
+
+.member-header {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+}
+
+.member-name {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.member-subname {
+  font-size: 0.9rem;
+  color: var(--color-text-sub);
+  font-weight: 400;
+  opacity: 0.8;
+}
+
+.member-bio {
+  font-size: 0.95rem;
+  color: #ddddff;
+  line-height: 1.5;
+  word-wrap: break-word;
+  /* Ensure line break */
+  overflow-wrap: break-word;
+}
+
+@media (max-width: 480px) {
+  .member-card {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding-top: 30px;
+    /* Space for number */
+  }
+
+  .member-card::before {
+    left: 50%;
+    transform: translateX(-50%);
+    top: -15px;
+  }
+
+  .member-header {
+    justify-content: center;
+  }
+
+  .logo-text {
+    font-size: 1.4rem;
+    /* Even smaller for very small screens */
+  }
+
+  .nav-item {
+    padding: 6px 10px;
+    font-size: 0.8rem;
+  }
 }
