@@ -401,13 +401,18 @@ h3 {
   overflow-wrap: break-word;
 }
 
-@media (max-width: 480px) {
+@media (max-width: 768px) {
   .member-card {
     flex-direction: column;
     align-items: center;
     text-align: center;
     padding-top: 30px;
     /* Space for number */
+  }
+
+  .member-icon-wrapper {
+    width: 60px;
+    height: 60px;
   }
 
   .member-card::before {
