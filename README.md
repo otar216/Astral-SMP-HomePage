@@ -1,7 +1,7 @@
 # Astral-SMP Official Website
 
-Astral-SMPの公式Webサイトプロジェクトです。
-HTML/CSS/JSのみで構成されており、ビルド不要でGitHub Pages等にアップロードするだけで公開可能です。
+Astral-SMPの公式Webサイトプロジェクト。
+HTML/CSS/JSのみで構成。
 
 ## ディレクトリ構成
 ```text
@@ -13,6 +13,9 @@ HTML/CSS/JSのみで構成されており、ビルド不要でGitHub Pages等に
  ├ js/main.js        (ナビゲーション動作などのスクリプト)
  └ assets/
      ├ images/       (画像ファイル)
+        └ contents/      (コンテンツ用の画像)
+        └ members/      (鯖メンのアイコン用の画像)
+        └ history/      (沿革用の画像)
      └ icons/        (SNSアイコン)
 ```
 
