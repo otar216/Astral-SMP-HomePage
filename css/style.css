@@ -1328,3 +1328,195 @@ h3 {
   filter: brightness(0.4);
   transform: scale(1.05);
 }
+
+/* -------------------------------------
+ * Premium UI Enhancements
+ * ------------------------------------- */
+
+/* 1. Custom Scrollbar (Apple/Modern style) */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-bg-dark); 
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* 2. Text Selection Color */
+::selection {
+  background-color: var(--color-accent-glow);
+  color: #ffffff;
+}
+::-moz-selection {
+  background-color: var(--color-accent-glow);
+  color: #ffffff;
+}
+
+/* 3. Shine Effect for Cards (No overflow bug risk) */
+.content-card,
+.member-card {
+  /* Combine existing glass background with shine gradient */
+  background: linear-gradient(135deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 40%, rgba(255,255,255,0.08) 50%, rgba(255,255,255,0) 60%, rgba(255,255,255,0) 100%), var(--color-glass);
+  background-size: 300% 300%;
+  background-position: 100% 100%;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-position 0.6s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
+}
+
+.content-card:hover,
+.member-card:hover {
+  background-position: 0% 0%;
+}
+
+/* Restoring content-card specific hover effects */
+.content-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 30px var(--color-accent-glow);
+}
+
+/* -------------------------------------
+ * 4. Cinematic Opening (Hero Section)
+ * ------------------------------------- */
+.intro-title {
+  opacity: 0;
+  animation: cinematic-title 2s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
+}
+.intro-sub {
+  opacity: 0;
+  animation: cinematic-fade 1.5s cubic-bezier(0.16, 1, 0.3, 1) 0.8s forwards;
+}
+.intro-btn {
+  opacity: 0;
+  animation: cinematic-fade 1.5s cubic-bezier(0.16, 1, 0.3, 1) 1.2s forwards;
+}
+.intro-logo {
+  opacity: 0;
+  animation: cinematic-fade 3s cubic-bezier(0.16, 1, 0.3, 1) 0.5s forwards;
+}
+
+@keyframes cinematic-title {
+  0% {
+    opacity: 0;
+    transform: translateY(40px) scale(0.9);
+    filter: blur(15px);
+    letter-spacing: 20px;
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+    letter-spacing: normal;
+  }
+}
+
+@keyframes cinematic-fade {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+    filter: blur(8px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+/* -------------------------------------
+ * 5. Opening Ambient Shapes (Temporary)
+ * ------------------------------------- */
+/* コンテナ（バグ防止・フラッシュ演出） */
+.hero-ambient-shapes {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden; /* はみ出しによる横スクロールバグを防止 */
+  pointer-events: none; /* 下にあるボタンのクリック等を邪魔しない */
+  z-index: 1;
+  background: rgba(255, 255, 255, 0);
+  animation: opening-flash 2.5s ease-out forwards;
+}
+
+/* 幾何学的なレーザーライン */
+.shape-line {
+  position: absolute;
+  background: rgba(255, 255, 255, 1);
+  box-shadow: 0 0 30px 4px rgba(77, 150, 255, 0.9);
+  opacity: 0;
+}
+.line-h {
+  top: 35%;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  transform-origin: left;
+  transform: scaleX(0);
+  animation: draw-line-h 2s cubic-bezier(0.1, 0.8, 0.2, 1) 0.1s forwards;
+}
+.line-v {
+  top: 0;
+  left: 65%;
+  width: 2px;
+  height: 100%;
+  transform-origin: top;
+  transform: scaleY(0);
+  animation: draw-line-v 2s cubic-bezier(0.1, 0.8, 0.2, 1) 0.4s forwards;
+}
+
+/* 巨大な光のオーブ波紋 */
+.hero-ambient-shapes::before,
+.hero-ambient-shapes::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  opacity: 0;
+  mix-blend-mode: screen;
+}
+.hero-ambient-shapes::before {
+  width: 100vw;
+  height: 100vw;
+  background: radial-gradient(circle, rgba(77, 100, 255, 0.6) 0%, rgba(77, 100, 255, 0) 70%);
+  animation: ambient-wave-1 3.5s cubic-bezier(0.1, 0.8, 0.2, 1) 0s forwards;
+}
+.hero-ambient-shapes::after {
+  width: 150vw;
+  height: 150vw;
+  border: 4px solid rgba(200, 220, 255, 0.8);
+  box-shadow: 0 0 40px rgba(77, 77, 255, 0.8), inset 0 0 40px rgba(77, 77, 255, 0.8);
+  animation: ambient-wave-2 3.5s cubic-bezier(0.1, 0.8, 0.2, 1) 0.2s forwards;
+}
+
+@keyframes opening-flash {
+  0% { background: rgba(255, 255, 255, 0.9); }
+  20% { background: rgba(200, 220, 255, 0.2); }
+  100% { background: rgba(255, 255, 255, 0); }
+}
+@keyframes draw-line-h {
+  0% { transform: scaleX(0); opacity: 1; }
+  40% { transform: scaleX(1); opacity: 1; }
+  100% { transform: scaleX(1); opacity: 0; }
+}
+@keyframes draw-line-v {
+  0% { transform: scaleY(0); opacity: 1; }
+  40% { transform: scaleY(1); opacity: 1; }
+  100% { transform: scaleY(1); opacity: 0; }
+}
+@keyframes ambient-wave-1 {
+  0% { transform: translate(-50%, -50%) scale(0); opacity: 1; }
+  100% { transform: translate(-50%, -50%) scale(1.5); opacity: 0; }
+}
+@keyframes ambient-wave-2 {
+  0% { transform: translate(-50%, -50%) scale(0.3) rotate(0deg); opacity: 1; }
+  100% { transform: translate(-50%, -50%) scale(1.2) rotate(45deg); opacity: 0; }
+}
