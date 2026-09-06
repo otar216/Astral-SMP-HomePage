@@ -1,0 +1,12 @@
+{
+  "name": "Ast-HP",
+  "version": "1.0.0",
+  "description": "ASTRAL-SMPの公式Webサイトプロジェクト。\r HTML/CSS/JSのみで構成された静的Webサイト。",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

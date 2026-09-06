@@ -3,14 +3,22 @@
 document.addEventListener('DOMContentLoaded', () => {
     // Navigation Scroll Effect
     const header = document.querySelector('.main-header');
-
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) {
-            header.classList.add('scrolled');
-        } else {
-            header.classList.remove('scrolled');
-        }
-    });
+    if (header) {
+        let isHeaderTicking = false;
+        window.addEventListener('scroll', () => {
+            if (!isHeaderTicking) {
+                window.requestAnimationFrame(() => {
+                    if (window.scrollY > 50) {
+                        header.classList.add('scrolled');
+                    } else {
+                        header.classList.remove('scrolled');
+                    }
+                    isHeaderTicking = false;
+                });
+                isHeaderTicking = true;
+            }
+        }, { passive: true });
+    }
 
     // Intersection Observer for Fade-in Animations
     const observerOptions = {
@@ -31,21 +39,24 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }, observerOptions);
 
-    // Parallax Effect for Hero Logo
+    // Parallax Effect for Hero Logo (Optimized for performance)
+    let isTicking = false;
     window.addEventListener('scroll', () => {
-        const heroLogo = document.getElementById('heroBgLogo');
-        if (heroLogo) {
-            const scrollValue = window.scrollY;
-            // Only animate if within reasonable range to save performance
-            if (scrollValue < 1000) {
-                // Parallax: Only move vertically and rotate.
-                // Wrapper handles centering.
-                heroLogo.style.transform = `translateY(${scrollValue * 0.4}px) rotate(${scrollValue * 0.05}deg)`;
-                // Fade out as scroll down
-                heroLogo.style.opacity = Math.max(0, 0.4 - (scrollValue / 800)); // Start from 0.4, fade faster
-            }
+        if (!isTicking) {
+            window.requestAnimationFrame(() => {
+                const heroLogo = document.getElementById('heroBgLogo');
+                if (heroLogo) {
+                    const scrollValue = window.scrollY;
+                    if (scrollValue < 1000) {
+                        heroLogo.style.transform = `translateY(${scrollValue * 0.4}px) rotate(${scrollValue * 0.05}deg)`;
+                        heroLogo.style.opacity = Math.max(0, 0.4 - (scrollValue / 800));
+                    }
+                }
+                isTicking = false;
+            });
+            isTicking = true;
         }
-    });
+    }, { passive: true });
 
     // Scroll Reveal Animation (Intersection Observer)
     const revealElements = document.querySelectorAll('.animate-in, .fade-trigger, .scroll-reveal');
